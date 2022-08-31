@@ -107,9 +107,6 @@ def get_statements(source):
 
 def build_dict(node):
     result = {}
-    if node.__class__.__name__ == "Is" or node.__class__.__name__ == "Eq":
-        result["node_type"] = node.__class__.__name__
-    for attr in dir(node):
         if (
             not attr.startswith("_")
             and attr != "ctx"
@@ -120,6 +117,9 @@ def build_dict(node):
             and attr != "kind"
             and attr != "n"
         ):
+    if node.__class__.__name__ == "Is" or node.__class__.__name__ == "Eq":
+        result["node_type"] = node.__class__.__name__
+    for attr in dir(node):
             value = getattr(node, attr)
             if isinstance(value, ast.AST):
                 value = build_dict(value)
