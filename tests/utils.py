@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 from jinja2 import Environment, PackageLoader, exceptions, meta, nodes
 
 
+
 env = Environment(loader=PackageLoader("jobs", "templates"))
 
 
@@ -107,7 +108,7 @@ def get_statements(source):
 
 def build_dict(node):
     result = {}
-        if (
+    if (
             not attr.startswith("_")
             and attr != "ctx"
             and attr != "lineno"
@@ -117,8 +118,8 @@ def build_dict(node):
             and attr != "kind"
             and attr != "n"
         ):
-    if node.__class__.__name__ == "Is" or node.__class__.__name__ == "Eq":
-        result["node_type"] = node.__class__.__name__
+        if node.__class__.__name__ == "Is" or node.__class__.__name__ == "Eq":
+         result["node_type"] = node.__class__.__name__
     for attr in dir(node):
             value = getattr(node, attr)
             if isinstance(value, ast.AST):
